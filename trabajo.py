@@ -125,11 +125,7 @@ class partido:
             self.visitante.jugadores.remove(jugador)
             
         
-        # elif equipo == None: 
-        #     print(f"2 amarilla para {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos")
-        #     jugador.tarjetaRoja = True
-            
-        #     self.local.jugadores.remove(jugador)
+        
             
 
 
