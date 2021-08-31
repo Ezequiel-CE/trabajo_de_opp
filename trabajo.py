@@ -3,6 +3,8 @@ import random
 nombres= ["juan","carlos","ramiro","fernando","gabriel"]
 apellidos = ["carrizo","escudero","fernandez","sosa","michelo"]
 
+## clase jugador
+
 
 class jugador:
     def __init__(self):
@@ -70,31 +72,37 @@ class partido:
         print("finaliza el partido")
         
     def gol(self,equipo,minuto):
+        
+        #compara que equipo es
         if equipo == self.local:
-            jugador=self.local.jugadores[random.randint(0,10)]
+            jugador=random.choice(self.local.jugadores)  #escoge el jugador
             print(f"gol de {self.local.nombre} hecho por {jugador.nombre} {jugador.apellido} en minuto {minuto}")
         else:
-            jugador=self.visitante.jugadores[random.randint(0,10)]
+            jugador=random.choice(self.visitante.jugadores)
             print(f"gol de {self.visitante.nombre} hecho por {jugador.nombre} {jugador.apellido} en minuto {minuto}")
             
         pass
     
     def tarjeta_amarilla(self,equipo):
         
+        #compara equipo
+        
         if equipo == self.local:
-            jugador=self.local.jugadores[random.randint(0,10)]
+            jugador=random.choice(self.local.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta amarilla, se suma una amarilla a {self.local.nombre} ")
             jugador.tarjetaAmarilla += 1
             
+            #si tiene mas de 2 tarjetas es roja
+            
             if jugador.tarjetaAmarilla >= 2:
-                self.tarjeta_roja(None,jugador)
+                self.tarjeta_roja(self.local,jugador)
         else:
-            jugador=self.visitante.jugadores[random.randint(0,10)]
+            jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta amarilla, se suma una amarilla a {self.visitante.nombre} ")
             jugador.tarjetaAmarilla += 1
            
             if jugador.tarjetaAmarilla >= 2:
-                self.tarjeta_roja(None,jugador)
+                self.tarjeta_roja(self.visitante,jugador)
         
         
             
@@ -102,21 +110,26 @@ class partido:
         
         if equipo == self.local:
             
-            jugador=self.local.jugadores[random.randint(0,10)]
+            jugador=random.choice(self.local.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos ")
             jugador.tarjetaRoja = True
+            self.local.jugadores.remove(jugador)
+            
             
             
         elif equipo == self.visitante:
             
-            jugador=self.visitante.jugadores[random.randint(0,10)]
+            jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.visitante.nombre} juega con uno menos ")
             jugador.tarjetaRoja = True
+            self.visitante.jugadores.remove(jugador)
             
         
-        elif equipo == None: 
-            print(f"2 amarilla para {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos")
-            jugador.tarjetaRoja = True
+        # elif equipo == None: 
+        #     print(f"2 amarilla para {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos")
+        #     jugador.tarjetaRoja = True
+            
+        #     self.local.jugadores.remove(jugador)
             
 
 
@@ -137,6 +150,7 @@ boca = equipo("Boca")
 river = equipo("River")
 boca.llenar_equipo()
 river.llenar_equipo()
+river.ver_jugadores()
 
 
 
@@ -148,25 +162,23 @@ partido1.inicio()
 partido1.gol(river,45)
 
 partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-
-partido1.tarjeta_amarilla(boca)
-
-partido1.tarjeta_amarilla(boca)
-
-partido1.tarjeta_amarilla(boca)
-
-partido1.tarjeta_amarilla(boca)
-
-partido1.tarjeta_amarilla(boca)
-
-partido1.tarjeta_amarilla(boca)
-
-
+partido1.tarjeta_amarilla(river)
+partido1.tarjeta_roja(boca)
+partido1.tarjeta_amarilla(river)
 
 partido1.tarjeta_amarilla(river)
 
-partido1.tarjeta_roja(river)
+partido1.tarjeta_amarilla(river)
+
+partido1.tarjeta_amarilla(river)
+
+partido1.tarjeta_amarilla(river)
+
+partido1.tarjeta_amarilla(river)
+
+
+
+river.ver_jugadores()
+
 
 
