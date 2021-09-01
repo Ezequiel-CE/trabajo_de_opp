@@ -106,9 +106,16 @@ class partido:
         
         
             
-    def tarjeta_roja(self,equipo=None,jugador=None):
+    def tarjeta_roja(self,equipo=None,jugadorArgumen=None):
         
-        if equipo == self.local:
+        #corregir el tema de cuando un jgador tiene mas de 2 amarillas
+        
+        if jugadorArgumen != None :
+            print(f"2 amarillas de {jugadorArgumen.nombre} {jugadorArgumen.apellido} , el arbitro le saca la tarjeta roja, {equipo.nombre} juega con uno menos ")
+            equipo.jugadores.remove(jugadorArgumen)
+        
+        
+        if equipo == self.local and jugadorArgumen== None:
             
             jugador=random.choice(self.local.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos ")
@@ -117,13 +124,14 @@ class partido:
             
             
             
-        elif equipo == self.visitante:
+        elif equipo == self.visitante and jugadorArgumen== None:
             
             jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.visitante.nombre} juega con uno menos ")
             jugador.tarjetaRoja = True
             self.visitante.jugadores.remove(jugador)
-            
+        
+        
         
         
             
@@ -157,9 +165,9 @@ partido1 = partido(boca,river)
 partido1.inicio()
 partido1.gol(river,45)
 
-partido1.tarjeta_amarilla(boca)
+
 partido1.tarjeta_amarilla(river)
-partido1.tarjeta_roja(boca)
+
 partido1.tarjeta_amarilla(river)
 
 partido1.tarjeta_amarilla(river)
