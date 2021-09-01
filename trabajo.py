@@ -1,15 +1,15 @@
 import random
 
-nombres= ["juan","carlos","ramiro","fernando","gabriel"]
-apellidos = ["carrizo","escudero","fernandez","sosa","michelo"]
+listaNombres= ["juan","carlos","ramiro","fernando","gabriel"]
+listaApellidos = ["carrizo","escudero","fernandez","sosa","michelo"]
 
 ## clase jugador
 
 
 class jugador:
     def __init__(self):
-        self.nombre = random.choice(nombres)
-        self.apellido = random.choice(apellidos)
+        self.nombre = random.choice(listaNombres)
+        self.apellido = random.choice(listaApellidos)
         self.numero = random.randint(1,30)
         self.edad = random.randint(18,35)
         self.altura = round(random.uniform(1.30,2.00),2)
