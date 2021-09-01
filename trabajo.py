@@ -14,7 +14,7 @@ class jugador:
         self.edad = random.randint(18,35)
         self.altura = round(random.uniform(1.30,2.00),2)
         self.tarjetaAmarilla= 0
-        self.tarjetaRoja= False
+        
         
         
     
@@ -49,10 +49,9 @@ class equipo:
     def ver_jugadores(self):
         for j in self.jugadores:
             print(vars(j))
-            
-    
 
-#print(vars(jugador1))
+
+
 
 ###################### clase partido
 
@@ -77,12 +76,14 @@ class partido:
         if equipo == self.local:
             jugador=random.choice(self.local.jugadores)  #escoge el jugador
             print(f"gol de {self.local.nombre} hecho por {jugador.nombre} {jugador.apellido} en minuto {minuto}")
+            
         else:
             jugador=random.choice(self.visitante.jugadores)
             print(f"gol de {self.visitante.nombre} hecho por {jugador.nombre} {jugador.apellido} en minuto {minuto}")
             
         pass
-    
+
+
     def tarjeta_amarilla(self,equipo):
         
         #compara equipo
@@ -103,12 +104,12 @@ class partido:
            
             if jugador.tarjetaAmarilla >= 2:
                 self.tarjeta_roja(self.visitante,jugador)
-        
-        
-            
+
+
+
     def tarjeta_roja(self,equipo=None,jugadorArgumen=None):
         
-        #corregir el tema de cuando un jgador tiene mas de 2 amarillas
+        #corregir el tema de cuando un jugador tiene mas de 2 amarillas
         
         if jugadorArgumen != None :
             print(f"2 amarillas de {jugadorArgumen.nombre} {jugadorArgumen.apellido} , el arbitro le saca la tarjeta roja, {equipo.nombre} juega con uno menos ")
@@ -119,7 +120,6 @@ class partido:
             
             jugador=random.choice(self.local.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos ")
-            jugador.tarjetaRoja = True
             self.local.jugadores.remove(jugador)
             
             
@@ -128,13 +128,10 @@ class partido:
             
             jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.visitante.nombre} juega con uno menos ")
-            jugador.tarjetaRoja = True
             self.visitante.jugadores.remove(jugador)
         
         
-        
-        
-            
+
 
 
 
@@ -152,6 +149,10 @@ class partido:
 
 boca = equipo("Boca")
 river = equipo("River")
+
+
+
+
 boca.llenar_equipo()
 river.llenar_equipo()
 river.ver_jugadores()
@@ -163,7 +164,7 @@ river.ver_jugadores()
 
 partido1 = partido(boca,river)
 partido1.inicio()
-partido1.gol(river,45)
+partido1.gol(boca,50)
 
 
 partido1.tarjeta_amarilla(river)
@@ -180,6 +181,8 @@ partido1.tarjeta_amarilla(river)
 
 partido1.tarjeta_amarilla(river)
 
+
+partido1.tarjeta_roja(river)
 
 
 river.ver_jugadores()
