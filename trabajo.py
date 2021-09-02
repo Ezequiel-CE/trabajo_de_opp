@@ -14,10 +14,7 @@ class jugador:
         self.edad = random.randint(18,35)
         self.altura = round(random.uniform(1.30,2.00),2)
         self.tarjetaAmarilla= 0
-        
-        
-        
-    
+
 
 
 
@@ -129,8 +126,12 @@ class partido:
             jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.visitante.nombre} juega con uno menos ")
             self.visitante.jugadores.remove(jugador)
-        
-        
+    
+    def posecion(self):
+        posesion_equipo = random.randint(0,100)
+        print("Posecion de {} {} % , posecion de {} {} %".format(self.local.nombre , posesion_equipo ,self.visitante.nombre,100-posesion_equipo ))
+
+    
 
 
 
@@ -166,26 +167,7 @@ partido1 = partido(boca,river)
 partido1.inicio()
 partido1.gol(boca,50)
 
-
-partido1.tarjeta_amarilla(river)
-
-partido1.tarjeta_amarilla(river)
-
-partido1.tarjeta_amarilla(river)
-
-partido1.tarjeta_amarilla(river)
-
-partido1.tarjeta_amarilla(river)
-
-partido1.tarjeta_amarilla(river)
-
-partido1.tarjeta_amarilla(river)
-
-
-partido1.tarjeta_roja(river)
-
-
-river.ver_jugadores()
+partido1.posecion()
 
 
 
