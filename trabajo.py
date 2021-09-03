@@ -93,27 +93,22 @@ class partido:
             #si tiene mas de 2 tarjetas es roja
             
             if jugador.tarjetaAmarilla >= 2:
-                self.tarjeta_roja(self.local,jugador)
+                self.local.jugadores.remove(jugador)
+                print(f"2 amarillas de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos ")
         else:
             jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta amarilla, se suma una amarilla a {self.visitante.nombre} ")
             jugador.tarjetaAmarilla += 1
            
             if jugador.tarjetaAmarilla >= 2:
-                self.tarjeta_roja(self.visitante,jugador)
+                self.visitante.jugadores.remove(jugador)
+                self.local.jugadores.remove(jugador)
+                print(f"2 amarillas de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.visitante.nombre} juega con uno menos ")
 
 
-
-    def tarjeta_roja(self,equipo=None,jugadorArgumen=None):
+    def roja_acumulacion(self,equipo):
         
-        #corregir el tema de cuando un jugador tiene mas de 2 amarillas
-        
-        if jugadorArgumen != None :
-            print(f"2 amarillas de {jugadorArgumen.nombre} {jugadorArgumen.apellido} , el arbitro le saca la tarjeta roja, {equipo.nombre} juega con uno menos ")
-            equipo.jugadores.remove(jugadorArgumen)
-        
-        
-        if equipo == self.local and jugadorArgumen== None:
+        if equipo == self.local:
             
             jugador=random.choice(self.local.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos ")
@@ -121,7 +116,7 @@ class partido:
             
             
             
-        elif equipo == self.visitante and jugadorArgumen== None:
+        elif equipo == self.visitante:
             
             jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.visitante.nombre} juega con uno menos ")
@@ -163,11 +158,22 @@ river.ver_jugadores()
 
 
 
+
 partido1 = partido(boca,river)
 partido1.inicio()
 partido1.gol(boca,50)
 
-partido1.posecion()
 
 
+partido1.tarjeta_amarilla(boca)
+partido1.tarjeta_amarilla(boca)
+partido1.tarjeta_amarilla(boca)
+partido1.tarjeta_amarilla(boca)
+partido1.tarjeta_amarilla(boca)
+partido1.tarjeta_amarilla(boca)
+partido1.tarjeta_amarilla(boca)
+partido1.tarjeta_amarilla(boca)
+partido1.tarjeta_amarilla(boca)
 
+
+boca.ver_jugadores()
