@@ -99,14 +99,15 @@ class partido:
             jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta amarilla, se suma una amarilla a {self.visitante.nombre} ")
             jugador.tarjetaAmarilla += 1
-           
             if jugador.tarjetaAmarilla >= 2:
                 self.visitante.jugadores.remove(jugador)
                 self.local.jugadores.remove(jugador)
                 print(f"2 amarillas de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.visitante.nombre} juega con uno menos ")
 
+    
 
-    def roja_acumulacion(self,equipo):
+
+    def roja_directa(self,equipo):
         
         if equipo == self.local:
             
