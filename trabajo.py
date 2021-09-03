@@ -1,7 +1,7 @@
 import random
 
-listaNombres= ["juan","carlos","ramiro","fernando","gabriel"]
-listaApellidos = ["carrizo","escudero","fernandez","sosa","michelo"]
+listaNombres= ["juan","carlos","ramiro","fernando","gabriel","jose","matias","gustavo","ezequeiel","cristian",]
+listaApellidos = ["carrizo","escudero","fernandez","sosa","michelo","campos","martinez","carpio","villafañes","mazzareli"]
 
 ## clase jugador
 
@@ -36,6 +36,7 @@ class equipo:
         
         self.nombre = (nombre)
         self.jugadores=[]
+        self.goles = 0
         
         
     
@@ -45,7 +46,8 @@ class equipo:
     
     def ver_jugadores(self):
         for j in self.jugadores:
-            print(vars(j))
+            #print(vars(j))
+            print(f" {j.nombre} {j.apellido} {j.numero} para {self.nombre}")
 
 
 
@@ -67,17 +69,25 @@ class partido:
     def final(self):
         print("finaliza el partido")
         
+    def entretiempo(self):
+        print("Finaliza primer tiempo")
+        print("----------------------")
+        print("----------------------")
+        print("----------------------")
+        print("Empieza segundo tiempo")
+        
     def gol(self,equipo,minuto):
         
         #compara que equipo es
         if equipo == self.local:
             jugador=random.choice(self.local.jugadores)  #escoge el jugador
             print(f"gol de {self.local.nombre} hecho por {jugador.nombre} {jugador.apellido} en minuto {minuto}")
+            self.local.goles += 1
             
         else:
             jugador=random.choice(self.visitante.jugadores)
             print(f"gol de {self.visitante.nombre} hecho por {jugador.nombre} {jugador.apellido} en minuto {minuto}")
-            
+            self.visitante.goles += 1
         pass
 
 
@@ -90,15 +100,20 @@ class partido:
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta amarilla, se suma una amarilla a {self.local.nombre} ")
             jugador.tarjetaAmarilla += 1
             
-            #si tiene mas de 2 tarjetas es roja
+            #si tiene mas de 2 tarjetas es roja y lo saca del equipo
             
             if jugador.tarjetaAmarilla >= 2:
                 self.local.jugadores.remove(jugador)
                 print(f"2 amarillas de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta roja, {self.local.nombre} juega con uno menos ")
         else:
+            #jugador visitante
+            
             jugador=random.choice(self.visitante.jugadores)
             print(f"falta de {jugador.nombre} {jugador.apellido} , el arbitro le saca la tarjeta amarilla, se suma una amarilla a {self.visitante.nombre} ")
             jugador.tarjetaAmarilla += 1
+            
+            #si tiene mas de 2 tarjetas es roja y lo saca del equipo
+            
             if jugador.tarjetaAmarilla >= 2:
                 self.visitante.jugadores.remove(jugador)
                 self.local.jugadores.remove(jugador)
@@ -124,10 +139,13 @@ class partido:
             self.visitante.jugadores.remove(jugador)
     
     def posecion(self):
-        posesion_equipo = random.randint(0,100)
+        posesion_equipo = random.randint(30,80)
         print("Posecion de {} {} % , posecion de {} {} %".format(self.local.nombre , posesion_equipo ,self.visitante.nombre,100-posesion_equipo ))
 
-    
+    def resultado(self):
+        print("###################")
+        print(f"Final del partido, El resultado es  {self.local.nombre} : {self.local.goles} || {self.visitante.nombre} : {self.visitante.goles}")
+        
 
 
 
@@ -148,33 +166,34 @@ boca = equipo("Boca")
 river = equipo("River")
 
 
-
+#completa los equipos
 
 boca.llenar_equipo()
 river.llenar_equipo()
 river.ver_jugadores()
+print("##############################")
+boca.ver_jugadores()
 
 
+print("##############################")
 
 
-
-
+#Instanciamos partido
 
 partido1 = partido(boca,river)
+
+
 partido1.inicio()
-partido1.gol(boca,50)
+partido1.gol(boca,20)
+partido1.tarjeta_amarilla(boca)
+partido1.gol(river,30)
+partido1.roja_directa(river)
+partido1.entretiempo()
+partido1.gol(boca,60)
+partido1.gol(boca,85)
+partido1.final()
+partido1.posecion()
+partido1.resultado()
 
 
 
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-partido1.tarjeta_amarilla(boca)
-
-
-boca.ver_jugadores()
